@@ -24,126 +24,129 @@
             padding: 20px;
         }
 
-        /* --- UI FORMULARIO (INTERFAZ) --- */
+        /* --- FORMULARIO --- */
         .card-ui {
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.05);
             width: 100%;
-            max-width: 500px;
+            max-width: 550px;
             box-sizing: border-box;
         }
 
-        .logo-center { text-align: center; margin-bottom: 25px; }
-        .logo-ui { max-width: 180px; height: auto; }
+        .logo-center { text-align: center; margin-bottom: 20px; }
+        .logo-ui { max-width: 160px; height: auto; }
 
         h2.subtitle-ui {
             text-align: center;
             color: var(--gersa-blue);
             font-weight: 600;
-            font-size: 1.1rem;
-            margin: 0 0 35px;
+            font-size: 1rem;
+            margin: 0 0 25px;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        .field { margin-bottom: 18px; }
-        label { display: block; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; }
+        .field { margin-bottom: 15px; }
+        label { display: block; font-size: 10px; font-weight: 600; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; }
         
-        input, textarea {
+        input, textarea, select {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
             font-family: inherit;
             box-sizing: border-box;
             background: #fcfcfd;
+            font-size: 14px;
         }
+
+        .row { display: flex; gap: 15px; }
+        .row .field { flex: 1; }
 
         .btn-generate {
             background: var(--gersa-blue);
             color: white;
             border: none;
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 20px;
-            font-size: 1rem;
+            margin-top: 15px;
+            font-size: 0.9rem;
             transition: 0.3s;
         }
 
         .btn-generate:hover { opacity: 0.9; }
 
-        /* --- DISEÑO PDF (ESTRUCTURA OCULTA) --- */
+        /* --- DISEÑO PDF --- */
         #pdf-render {
             display: none;
-            width: 794px; /* A4 */
+            width: 794px;
             background: white;
             color: #1a1a1a;
         }
 
         .pdf-top-bar { height: 8px; background-color: var(--gersa-blue); width: 100%; }
-        .pdf-content { padding: 60px 80px; }
+        .pdf-content { padding: 50px 70px; }
 
-        /* Encabezado en línea recta con letra pequeña */
         .pdf-header {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* Alineación a la par */
-            margin-bottom: 60px;
+            align-items: center;
+            margin-bottom: 50px;
             border-bottom: 1px solid #eee;
             padding-bottom: 20px;
         }
 
-        .pdf-logo { max-width: 170px; height: auto; }
+        .pdf-logo { max-width: 160px; height: auto; }
 
-        .pdf-title-text { text-align: right; margin: 0; }
         .pdf-title-single-line {
-            font-size: 14px; /* Letra más pequeña */
+            font-size: 13px;
             color: #2c3e50;
-            font-weight: 400;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin: 0;
         }
 
-        .pdf-welcome { font-size: 15px; color: #444; margin-bottom: 40px; line-height: 1.6; }
+        .pdf-welcome { font-size: 14px; color: #444; margin-bottom: 35px; line-height: 1.5; }
         .pdf-welcome strong { color: var(--gersa-blue); font-weight: 600; }
 
         .pdf-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 30px;
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
-            padding: 40px 0;
-            margin-bottom: 40px;
+            padding: 30px 0;
+            margin-bottom: 30px;
         }
 
-        .pdf-label { font-size: 10px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; }
-        .pdf-value { font-size: 17px; color: var(--gersa-blue); font-weight: 500; }
+        .pdf-label { font-size: 9px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .pdf-value { font-size: 15px; color: var(--gersa-blue); font-weight: 500; line-height: 1.3; }
+        .pdf-subvalue { font-size: 13px; color: #555; font-weight: 400; margin-top: 2px; }
 
         .pdf-notes-section {
             background-color: #fcfcfd;
-            padding: 25px;
+            padding: 20px;
             border-radius: 8px;
             border: 1px solid #f1f5f9;
         }
 
-        .pdf-notes-text { font-size: 14px; color: #555; line-height: 1.6; margin: 0; }
+        .pdf-notes-text { font-size: 13px; color: #555; line-height: 1.5; margin: 0; }
 
         .pdf-footer {
-            margin-top: 80px;
+            margin-top: 60px;
             text-align: center;
             border-top: 1px solid #eee;
-            padding-top: 25px;
+            padding-top: 20px;
             font-size: 10px;
-            color: #ccc;
-            letter-spacing: 1px;
+            color: #777;
+            line-height: 1.6;
         }
+        .pdf-footer a { color: var(--gersa-blue); text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -159,25 +162,36 @@
             <input type="text" id="cliente" placeholder="Ej. Juan Pérez">
         </div>
 
-        <div style="display: flex; gap: 15px;">
-            <div class="field" style="flex: 1;">
+        <div class="row">
+            <div class="field">
                 <label>Fecha de Cita</label>
                 <input type="date" id="fecha">
             </div>
-            <div class="field" style="flex: 1;">
+            <div class="field">
                 <label>Hora</label>
                 <input type="time" id="hora">
             </div>
         </div>
 
+        <div class="row">
+            <div class="field">
+                <label>Vendedor</label>
+                <input type="text" id="vendedor" placeholder="Nombre completo">
+            </div>
+            <div class="field">
+                <label>Teléfono Vendedor</label>
+                <input type="text" id="telVendedor" placeholder="10 dígitos">
+            </div>
+        </div>
+
         <div class="field">
-            <label>Vendedor / Atendido por</label>
-            <input type="text" id="vendedor" placeholder="Nombre del responsable">
+            <label>Sucursal para Pago</label>
+            <input type="text" id="sucursal" placeholder="Nombre de la sucursal">
         </div>
 
         <div class="field">
             <label>Motivo de la Cita</label>
-            <textarea id="motivo" rows="3" placeholder="Detalles de la visita..."></textarea>
+            <textarea id="motivo" rows="2" placeholder="Detalles de la visita..."></textarea>
         </div>
 
         <button class="btn-generate" onclick="descargarPDF()">DESCARGAR COMPROBANTE (PDF)</button>
@@ -188,71 +202,98 @@
         <div class="pdf-content">
             <div class="pdf-header">
                 <img src="logo-azul.png" alt="GERSA" class="pdf-logo">
-                
                 <div class="pdf-title-text">
                     <p class="pdf-title-single-line">Comprobante de Cita</p>
                 </div>
             </div>
 
             <p class="pdf-welcome">Estimado(a) <strong><span id="out-cliente"></span></strong>,</p>
-            <p class="pdf-welcome" style="margin-top: -30px;">Confirmamos los detalles de su próxima visita a nuestras instalaciones:</p>
+            <p class="pdf-welcome" style="margin-top: -25px;">Confirmamos los detalles de su próxima visita. Se recomienda llegar <strong>5 min antes</strong> de la hora indicada.</p>
 
             <div class="pdf-grid">
                 <div>
-                    <div class="pdf-label">Fecha Programada</div>
-                    <div id="out-fecha" class="pdf-value"></div>
+                    <div class="pdf-label">Fecha y Hora</div>
+                    <div class="pdf-value"><span id="out-fecha"></span> a las <span id="out-hora"></span> hrs.</div>
                 </div>
                 <div>
-                    <div class="pdf-label">Hora de Atención</div>
-                    <div id="out-hora" class="pdf-value"></div>
+                    <div class="pdf-label">Sucursal para Pago</div>
+                    <div id="out-sucursal" class="pdf-value"></div>
                 </div>
                 <div>
                     <div class="pdf-label">Vendedor Responsable</div>
-                    <div id="out-vendedor" class="pdf-value" style="font-size: 15px;"></div>
+                    <div id="out-vendedor" class="pdf-value"></div>
+                    <div id="out-telVendedor" class="pdf-subvalue"></div>
+                </div>
+                <div>
+                    <div class="pdf-label">Estatus</div>
+                    <div class="pdf-value" style="font-size: 13px; color: #27ae60;">Confirmada</div>
                 </div>
             </div>
 
-            <div class="pdf-label" style="margin-bottom: 12px;">Notas de la cita</div>
+            <div class="pdf-label" style="margin-bottom: 10px;">Notas de la cita</div>
             <div class="pdf-notes-section">
                 <p id="out-motivo" class="pdf-notes-text"></p>
             </div>
 
             <div class="pdf-footer">
-                Documento oficial de confirmación digital - <strong>GERSA</strong>.
+                Ventas en línea, solicitud del interesado. <br>
+                Duda o modificación contactar al teléfono del vendedor o visite <a href="https://www.gersamex.com/" target="_blank">www.gersamex.com</a> <br>
+                <strong>Documento oficial de confirmación digital - GERSA.</strong>
             </div>
         </div>
     </div>
 
     <script>
-        function descargarPDF() {
-            const cliente = document.getElementById('cliente').value;
-            if(!cliente) return alert("Por favor, ingresa el nombre del cliente.");
+    function descargarPDF() {
+        const cliente = document.getElementById('cliente').value;
+        if(!cliente) return alert("Por favor, ingresa el nombre del cliente.");
 
-            // Llenar datos al PDF
-            document.getElementById('out-cliente').innerText = cliente;
-            document.getElementById('out-fecha').innerText = document.getElementById('fecha').value || "Pendiente";
-            document.getElementById('out-hora').innerText = document.getElementById('hora').value || "Pendiente";
-            document.getElementById('out-vendedor').innerText = document.getElementById('vendedor').value || "No especificado";
-            document.getElementById('out-motivo').innerText = document.getElementById('motivo').value || "Visita comercial programada.";
+        // MAPEO DE DATOS AL PDF (DATOS VISIBLES)
+        document.getElementById('out-cliente').innerText = cliente;
+        document.getElementById('out-fecha').innerText = document.getElementById('fecha').value || "Pendiente";
+        document.getElementById('out-hora').innerText = document.getElementById('hora').value || "--:--";
+        document.getElementById('out-vendedor').innerText = document.getElementById('vendedor').value || "Asignado por tienda";
+        document.getElementById('out-telVendedor').innerText = "Tel: " + (document.getElementById('telVendedor').value || "N/A");
+        document.getElementById('out-sucursal').innerText = document.getElementById('sucursal').value || "Sucursal Matriz";
+        document.getElementById('out-motivo').innerText = document.getElementById('motivo').value || "Visita comercial programada.";
 
-            const element = document.getElementById('pdf-render');
-            element.style.display = 'block';
+        // PREPARACIÓN DE DATOS PARA GOOGLE SHEETS
+        const datosSheets = {
+            cliente: cliente,
+            fecha: document.getElementById('fecha').value,
+            hora: document.getElementById('hora').value,
+            vendedor: document.getElementById('vendedor').value,
+            telVendedor: document.getElementById('telVendedor').value,
+            sucursal: document.getElementById('sucursal').value,
+            motivo: document.getElementById('motivo').value
+        };
 
-            const opt = {
-                margin: 0,
-                filename: `Comprobante_Gersa_${cliente}.pdf`,
-                image: { type: 'jpeg', quality: 1 },
-                html2canvas: { scale: 3, useCORS: true, logging: false },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
+        const element = document.getElementById('pdf-render');
+        element.style.display = 'block';
 
-            // Pequeña espera para asegurar el renderizado
-            setTimeout(() => {
-                html2pdf().set(opt).from(element).save().then(() => {
-                    element.style.display = 'none';
-                });
-            }, 400);
-        }
-    </script>
+        const opt = {
+            margin: 0,
+            filename: `Cita_Gersa_${cliente}.pdf`,
+            image: { type: 'jpeg', quality: 1 },
+            html2canvas: { scale: 3, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // GENERAR PDF Y ENVIAR DATOS AL FORMULARIO DE SHEETS
+        setTimeout(() => {
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.display = 'none';
+                
+                // ENVIO DE DATOS A SHEETS DESPUÉS DE LA DESCARGA
+                    method: 'POST',
+                    mode: 'no-cors', 
+                    body: JSON.stringify(datosSheets)
+                }).then(() => {
+                    console.log("Datos guardados en Sheets correctamente.");
+                }).catch(err => console.error("Error al guardar en Sheets:", err));
+            });
+        }, 400);
+    }
+</script>
 </body>
 </html>
