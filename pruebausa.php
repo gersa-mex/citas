@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gersa | Desde EE. UU.</title>
+    <link rel="icon" type="image/png" sizes="34x34" href="img/temp/fla.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+body { font-family: 'Inter', sans-serif; }
+
+/* --- VARIABLES ORIGINALES (MANTENIDAS) --- */
+:root {
+    --bg-pastel-start: #f8fafc;
+    --bg-pastel-end: #f8fafc;
+    --text-main: #546e7a;
+    --circle-bg: #ffffff;
+    --circle-shadow: rgba(0, 0, 0, 0.08);
+    --circle-shadow-hover: rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Inter', 'Century Gothic';
+    margin: 0;
+    background-color: #fff;
+}
+
+/* --- NUEVOS ESTILOS PARA EL CARRUSEL ESTÁTICO (CORRECCIÓN) --- */
+.carousel-container {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+}
+.carousel-container::-webkit-scrollbar { display: none; }
+.product-card-static {
+    scroll-snap-align: start;
+    flex: 0 0 300px;
+}
+@media (max-width: 768px) {
+    .product-card-static { flex: 0 0 85%; }
+}
+
+/* --- HERO BANNER (MANTENIDO) --- */
+.hero-gradient {
+    width: 100%;
+    min-height: 75vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding-bottom: 90px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                      url('img/temp/bannerdos.png'); 
+}
+
+.hero-gradient p {
+    max-width: 850px;
+    margin: 20px auto 0;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+@media (max-width: 768px) {
+    .hero-gradient {
+        min-height: 95vh;
+        background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), 
+                          url('img/temp/bannercel.png');
+        background-position: top center;
+        padding-bottom: 50px;
+    }
+    .hero-gradient h1 { font-size: 2rem !important; }
+    .hero-gradient p { 
+        font-size: 0.95rem !important; 
+        max-width: 100% !important; 
+        padding: 0 20px;
+    }
+}
+
+/* --- SECCIONES ORIGINALES (MANTENIDAS) --- */
+.seccion-categorias-circle {
+    background: linear-gradient(135deg, var(--bg-pastel-start) 0%, var(--bg-pastel-end) 100%);
+    padding: 50px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+.grid-categorias-circle {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+}
+
+.cat-item-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 110px;
+}
+
+@media (max-width: 768px) {
+    .grid-categorias-circle { gap: 15px; }
+    .circulo-blanco { width: 80px; height: 80px; }
+    .cat-label-circle { font-size: 9px; letter-spacing: 1px; }
+    .cat-item-circle { width: 90px; }
+}
+
+.pin-pulse { animation: pulse 2s infinite; }
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.mexico-map-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.12));
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-300px * 4 - 1.0rem * 4)); }
+}
+.animate-scroll {
+    animation: scroll 25s linear infinite;
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+}
+
+.brand-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: grayscale(100%) opacity(0.6);
+}
+.brand-card:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: translateY(-5px);
+}
+
+/* --- CINTILLOS Y NAVEGACIÓN --- */
+.seccion-cintillos {
+    width: 100%;
+    font-family: "Century Gothic", AppleGothic, sans-serif;
+}
+
+.cintillo-slim {
+    background-color: #0d1b3e;
+    color: white;
+    padding: 18px 0;
+    border-top: 3px solid #33cc00;
+    width: 100%;
+}
+
+.cintillo-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.cintillo-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cintillo-icon-main {
+    width: 32px; 
+    height: auto;
+    flex-shrink: 0;
+}
+
+.cintillo-text {
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+.sub-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    font-size: 15px;
+}
+
+.paypal-logo {
+    height: 21px;
+    width: auto;
+    display: inline-block;
+}
+
+.highlight-green {
+    color: #33cc00;
+    font-weight: 800;
+}
+
+.title-bold {
+    font-weight: 900;
+}
+
+.item-separador {
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
+    flex: 1;
+}
+
+/* --- ESTILO BASE CATEGORÍAS --- */
+.categories-nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0d1b3e;
+}
+
+.cat-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* --- AJUSTES DE RESPONSIVIDAD MÓVIL --- */
+@media (max-width: 1000px) {
+    .cintillo-slim {
+        padding: 12px 0; 
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .cintillo-container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        gap: 24px;
+        padding: 0 15px;
+    }
+    .cintillo-container::-webkit-scrollbar { display: none; }
+
+    .cintillo-item {
+        flex: 0 0 auto; /* Evita que los ítems colapsen o se encimen */
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .cintillo-icon-main { 
+        width: 24px !important; 
+        height: 24px !important;
+        object-fit: contain;
+    }
+    
+    .cintillo-text { 
+        font-size: 11px !important; 
+        line-height: 1.3;
+        white-space: nowrap; 
+    }
+    
+    .sub-text { font-size: 11px !important; gap: 4px; }
+    .paypal-logo { height: 14px !important; width: auto; }
+
+    /* CATEGORÍAS: 2 Líneas Estéticas */
+    .categories-nav {
+        flex-wrap: wrap;       
+        justify-content: center; 
+        gap: 6px 12px;         
+        padding: 10px 5px;     
+    }
+
+    .cat-item {
+        flex: 0 1 auto;        
+        padding: 2px 0;
+    }
+
+    .cat-item a {
+        font-size: 8px;        
+        white-space: nowrap;   
+        letter-spacing: 0.2px;
+        display: block;
+    }
+
+    .categories-nav::-webkit-scrollbar { display: none; }
+}
+</style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <div class="bg-blue-900 text-white py-2 px-4 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center text-xs md:text-sm font-semibold">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1"><i data-lucide="phone" class="w-4 h-4 text-blue-300"></i> +52 (55) 1234 5678</span>
+                <span class="hidden md:flex items-center gap-1"><i data-lucide="truck" class="w-4 h-4 text-blue-300"></i> Entrega en todo México +400 sucursales a tu disposición. </span>
+            </div>
+            <div class="flex items-center gap-2 bg-blue-800 rounded-full px-3 py-1">
+                <span class="text-blue-200">Moneda:</span>
+                <button onclick="setCurrency('USD')" id="btn-usd" class="text-white opacity-100 font-bold">USD</button>
+                <span class="text-blue-400">|</span>
+                <button onclick="setCurrency('MXN')" id="btn-mxn" class="text-blue-300 opacity-60">MXN</button>
+            </div>
+        </div>
+    </div>
+        
+    <header class="glass py-2 px-6 border-b border-slate-200 sticky top-[40px] z-40">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="/" class="block">
+                    <img src="img/temp/logo-azul.png" alt="Logo GERSA" class="h-12 w-auto object-contain block">
+                </a>
+            </div>
+
+            <nav class="hidden md:flex gap-8 font-semibold text-slate-600">
+                <a href="#productos" class="hover:text-blue-600 transition-colors">Productos</a>
+                <a href="#como-funciona" class="hover:text-blue-600 transition-colors">¿Cómo comprar?</a>
+                <a href="#testimonios" class="hover:text-blue-600 transition-colors">Testimonios</a>
+                <a href="#sucursales" class="hover:text-blue-600 transition-colors">Sucursales</a>
+            </nav>
+            
+            <a href="https://wa.me/525512345678" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full font-bold flex items-center gap-2 transition-all shadow-lg shadow-green-200">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                WhatsApp USA
+            </a>
+        </div>
+    </header>
+
+<section class="hero-gradient min-h-[70vh] flex items-end justify-center text-center text-white px-6 pb-24">
+         <div class="space-y-6"> 
+             <div class="inline-block bg-[#33cc00]/30 backdrop-blur-md border border-[#33cc00]/30 px-4 py-1 rounded-full text-[#33cc00] font-bold text-sm uppercase tracking-widest animate-pulse">
+               Construye tu patrimonio en México
+         </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight shadow-sm">
+                   Trabaja duro allá, <br><span class="text-blue-400 italic">construye tu sueño acá.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-200 max-w-5xl mx-auto leading-relaxed font-light">
+                   Enviamos pisos, baños, calentadores y mucho más a cualquier ciudad de México. 
+                   Paga seguro desde Estados Unidos y nosotros nos encargamos del resto.
+                </p>
+         </div>
+</section>
+
+<div class="cintillo-slim">
+    <div class="cintillo-container">
+        
+        <div class="cintillo-item">
+            <img src="img/temp/pago-seguro.png" alt="Seguridad" class="cintillo-icon-main">
+            <div class="cintillo-text">
+                <span class="title-bold highlight-green">PAGO SEGURO</span><br>
+                <span class="sub-text">Con <img src="img/temp/paypal.png" alt="PayPal" class="paypal-logo"></span>
+            </div>
+        </div>
+        
+        <div class="cintillo-item">
+            <img src="img/temp/tienda.png" alt="Sucursales" class="cintillo-icon-main">
+            <div class="cintillo-text">
+                Contamos con <span class="highlight-green">+400 sucursales</span><br>
+                En todo <span class="highlight-green">México</span> para entrega.
+            </div>
+        </div>
+
+        <div class="cintillo-item">
+            <img src="img/temp/atencion.png" alt="Atención" class="cintillo-icon-main">
+            <div class="cintillo-text">
+                <span class="highlight-green">Atención personalizada</span><br>
+                <span class="atencion-horario">hasta media noche</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="cintillo-slim categories-bg">
+    <div class="cintillo-container">
+        <nav class="categories-nav">
+            <a href="#">CALENTADORES</a>
+            <a href="#">PISOS</a>
+            <a href="#">REGADERAS</a>
+            <a href="#">WC</a>
+            <a href="#">LAVABOS</a>
+            <a href="#">MEZCLADORAS</a>
+            <a href="#">TARJAS</a>
+            <a href="#">LUMINARIA</a>
+            <a href="#">PANEL</a>
+            <a href="#">CABINAS</a>
+            <a href="#">ESPEJOS</a>
+        </nav>
+    </div>
+</div>
+
+    <section class="py-16 px-6 bg-slate-50 border-t border-slate-200 overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h3 class="text-blue-900 font-black text-2xl uppercase tracking-tighter">NUESTRAS MARCAS</h3>
+            <div class="w-20 h-1.5 bg-[#33cc00] mx-auto mt-4 rounded-full"></div>
+        </div>
+        
+        <div class="animate-scroll" style="display: flex; gap: 2rem; width: max-content;">
+            
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/2.png" alt="Porcelanite" class="max-h-12 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/3.png" alt="Helvex" class="max-h-10 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/4.png" alt="Urrea" class="max-h-8 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/5.png" alt="Calorex" class="max-h-12 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/6.png" alt="Lamosa" class="max-h-10 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/logo-azul.png" alt="Cato" class="max-h-10 w-auto object-contain">
+            </div>
+
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/2.png" alt="Porcelanite" class="max-h-12 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/3.png" alt="Helvex" class="max-h-10 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/4.png" alt="Urrea" class="max-h-8 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/5.png" alt="Calorex" class="max-h-12 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/6.png" alt="Lamosa" class="max-h-10 w-auto object-contain">
+            </div>
+            <div class="brand-card bg-white/50 border border-slate-200 rounded-2xl p-6 flex items-center justify-center h-32 w-64" style="filter: none !important; opacity: 1 !important;">
+                <img src="img/temp/logo-azul.png" alt="Cato" class="max-h-10 w-auto object-contain">
+            </div>
+        </div>
+    </div>
+</section>
+
+   <section id="productos" class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 space-y-4">
+            <h2 class="text-3xl md:text-4xl font-black text-[#33cc00]">PROMOCIONES DEL MES</h2>
+            <p class="text-slate-500">Seleccionados por paisanos para sus familias en México.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-square">
+                    <img src="img/temp/HELVEX.jpeg" alt="Baño Moderno" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-8 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">HELVEX INSTITUCIONAL</h3>
+                    <p class="text-slate-500 text-sm mb-6 flex-1">Incluye: Inodoro One-Piece, Lavabo con mueble, Llave monomando y Espejo.</p>
+                    <div class="flex items-center justify-center mb-6">
+                        <span class="text-3xl font-black text-red-600 uppercase">15% DE DESCUENTO</span>
+                    </div>
+                    <a href="https://wa.me/5215512345678?text=Hola,%20me%20gustaría%20pedir%20una%20cotización" target="_blank">
+                          <button class="w-full bg-[#33cc00] hover:opacity-90 text-white py-4 rounded-2xl font-bold transition-all shadow-lg shadow-blue-200">
+                             Cotizar por WhatsApp
+                          </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-square">
+                    <img src="img/temp/calorex.jpeg" alt="Piso Porcelanato" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-8 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">CALOREX MÁS INSTALACIÓN</h3>
+                    <p class="text-slate-500 text-sm mb-6 flex-1">Acabado pulido brillante tipo mármol carrara. Caja cubre 1.44m².</p>
+                    <div class="flex items-center justify-center mb-6">
+                        <span class="text-3xl font-black text-red-600 uppercase">20% DE DESCUENTO</span>
+                    </div>
+                    <a href="https://wa.me/5215512345678?text=Hola,%20me%20gustaría%20pedir%20una%20cotización" target="_blank">
+                          <button class="w-full bg-[#33cc00] hover:opacity-90 text-white py-4 rounded-2xl font-bold transition-all shadow-lg shadow-blue-200">
+                             Cotizar por WhatsApp
+                          </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 overflow-hidden border border-slate-100 flex flex-col group">
+                <div class="relative overflow-hidden aspect-square">
+                    <img src="img/temp/formatos.jpeg" alt="Calentador Calorex" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-8 flex-1 flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">GRAN FORMATO </h3>
+                    <p class="text-slate-500 text-sm mb-6 flex-1">Rápida recuperación, 1.5 servicios. Ideal para familias de 4 personas.</p>
+                    <div class="flex items-center justify-center mb-6">
+                        <span class="text-3xl font-black text-red-600 uppercase">10% DE DESCUENTO</span>
+                    </div>
+                    <a href="https://wa.me/5215512345678?text=Hola,%20me%20gustaría%20pedir%20una%20cotización" target="_blank">
+                          <button class="w-full bg-[#33cc00] hover:opacity-90 text-white py-4 rounded-2xl font-bold transition-all shadow-lg shadow-blue-200">
+                             Cotizar por WhatsApp
+                          </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="py-20 bg-slate-100 border-y border-slate-200 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-8 flex items-end justify-between">
+            <div class="space-y-2">
+                <h2 class="text-3xl md:text-4xl font-black text-blue-900 tracking-tighter uppercase">LOS MÁS VENDIDOS</h2>
+                <p class="text-slate-500">Desliza para conocer nuestros productos estrella.</p>
+            </div>
+            <div class="hidden md:flex gap-2">
+                <button onclick="moveSlider(-1)" class="p-3 bg-white rounded-full shadow-md hover:bg-blue-50 transition-colors text-blue-900 border border-slate-200">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+                <button onclick="moveSlider(1)" class="p-3 bg-white rounded-full shadow-md hover:bg-blue-50 transition-colors text-blue-900 border border-slate-200">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <div id="product-slider" class="carousel-container">
+                
+                <div class="product-card-static bg-white rounded-3xl p-5 border border-slate-100 shadow-sm relative group">
+                    <div class="absolute top-8 left-8 z-10 bg-green-500 text-white text-[10px] font-black px-2 py-1 rounded-md uppercase tracking-widest">10% OFF</div>
+                    <div class="relative aspect-square mb-4 overflow-hidden rounded-2xl bg-slate-50">
+                        <img src="img/temp/im1.jfif" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm h-10 line-clamp-2">Monomando Para Lavabo Piazza Sin Contra Cromo</h4>
+                        <div class="flex items-center text-yellow-400 gap-1">
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i><i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                            <span class="text-xs text-slate-400 font-bold ml-1">4.9</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-xs text-slate-400 line-through price-val" data-base="2428.00">$2,428.00 MXN</span>
+                            <span class="text-blue-900 font-black text-xl price-val" data-base="2185.90">$2,185.90 MXN</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-50">
+                            <div class="flex gap-3">
+                                <a href="#" target="_blank" class="hover:scale-110 transition-transform"><img src="img/temp/ojo.png" class="w-6 h-6"></a>
+                                <a href="https://wa.me/521" class="hover:scale-110 transition-transform"><img src="img/temp/whatsapp.png" class="w-6 h-6"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card-static bg-white rounded-3xl p-5 border border-slate-100 shadow-sm relative group">
+                    <div class="absolute top-8 left-8 z-10 bg-green-500 text-white text-[10px] font-black px-2 py-1 rounded-md uppercase tracking-widest">10% OFF</div>
+                    <div class="relative aspect-square mb-4 overflow-hidden rounded-2xl bg-slate-50">
+                        <img src="img/temp/im2.jpeg" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm h-10 line-clamp-2">Calentador Calorex de Paso PODERUS 09 G2 LP</h4>
+                        <div class="flex items-center text-yellow-400 gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i><span class="text-xs text-slate-400 font-bold ml-1">5.0</span></div>
+                        <div class="flex flex-col">
+                            <span class="text-xs text-slate-400 line-through price-val" data-base="2428.00">$2,428.00 MXN</span>
+                            <span class="text-blue-900 font-black text-xl price-val" data-base="7518.96">$7,518.96 MXN</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-50">
+                            <div class="flex gap-3">
+                                <a href="#"><img src="img/temp/ojo.png" class="w-6 h-6"></a>
+                                <a href="#"><img src="img/temp/whatsapp.png" class="w-6 h-6"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card-static bg-white rounded-3xl p-5 border border-slate-100 shadow-sm relative group">
+                    <div class="relative aspect-square mb-4 overflow-hidden rounded-2xl bg-slate-50">
+                        <img src="img/temp/im3.jpeg" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm h-10 line-clamp-2">Calentador Calorex Depósito MAXIMUS G30 G2 LP</h4>
+                        <div class="flex items-center text-yellow-400 gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i><span class="text-xs text-slate-400 font-bold ml-1">4.8</span></div>
+                        <div class="flex flex-col">
+                            <span class="text-blue-900 font-black text-xl price-val" data-base="8630.56">$466.52 USD</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-50">
+                            <div class="flex gap-3">
+                                <a href="#"><img src="img/temp/ojo.png" class="w-6 h-6"></a>
+                                <a href="#"><img src="img/temp/whatsapp.png" class="w-6 h-6"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card-static bg-white rounded-3xl p-5 border border-slate-100 shadow-sm relative group">
+                    <div class="relative aspect-square mb-4 overflow-hidden rounded-2xl bg-slate-50">
+                        <img src="img/temp/im4.jfif" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm h-10 line-clamp-2">Tinaco Rotoplas Plus 1,100 LTS Equipado</h4>
+                        <div class="flex items-center text-yellow-400 gap-1"><i data-lucide="star" class="w-3 h-3 fill-current"></i><span class="text-xs text-slate-400 font-bold ml-1">4.8</span></div>
+                        <div class="flex flex-col">
+                            <span class="text-blue-900 font-black text-xl price-val" data-base="3700.50">$3,700.50 USD</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-50">
+                            <div class="flex gap-3">
+                                <a href="#"><img src="img/temp/ojo.png" class="w-6 h-6"></a>
+                                <a href="#"><img src="img/temp/whatsapp.png" class="w-6 h-6"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="sucursales" class="py-20 px-6 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            
+            <div class="space-y-6 order-1">
+                <div class="inline-flex items-center gap-2 bg-green-50 text-green-600 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i> Presencia Nacional
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black leading-tight text-slate-900">
+                    Contamos con más de <span class="text-[#2ea915]">400 sucursales</span> en toda la República.
+                </h2>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    Estamos en cada rincón de México para asegurar que tus materiales lleguen seguros y a tiempo. Ubica la sucursal más cercana al domicilio de tu familia.
+                </p>
+
+                <div class="space-y-3">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Nuestras tiendas:</p>
+                    <div class="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x">
+                        <div class="flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden shadow-md border border-slate-100 snap-center">
+                            <img src="img/temp/tienda1.jfif" alt="Sucursal Gersa" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden shadow-md border border-slate-100 snap-center">
+                            <img src="img/temp/tienda2.jfif" alt="Sucursal Gersa" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden shadow-md border border-slate-100 snap-center">
+                            <img src="img/temp/tienda1.jfif" alt="Sucursal Gersa" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden shadow-md border border-slate-100 snap-center">
+                            <img src="img/temp/tienda2.jfif" alt="Sucursal Gersa" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <a href="https://sucursales.gersamex.com/" target="_blank" class="inline-flex items-center gap-3 bg-[#33cc00] hover:bg-green-600 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-xl shadow-green-200 group">
+                        Ver listado de sucursales
+                        <i data-lucide="external-link" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="map-wrapper relative order-2 mt-12 md:mt-0">
+                
+                <img src="img/temp/mapa.png" alt="Mapa de Cobertura México Gersa" class="mexico-map-image">
+
+                <div class="absolute inset-0 z-10 pointer-events-none">
+                    <div class="relative w-full h-full">
+                        <div class="absolute top-[15%] left-[10%] flex h-5 w-5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-5 w-5 bg-[#ef4444] border-2 border-white shadow-xl"></span>
+                        </div>
+                        <div class="absolute top-[25%] left-[30%] flex h-5 w-5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-5 w-5 bg-[#ef4444] border-2 border-white shadow-xl"></span>
+                        </div>
+                        <div class="absolute top-[60%] left-[51%] flex h-7 w-7">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-7 w-7 bg-[#ef4444] border-4 border-white shadow-xl"></span>
+                        </div>
+                        <div class="absolute top-[66%] left-[85%] flex h-5 w-5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-5 w-5 bg-[#ef4444] border-2 border-white shadow-xl"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute -top-6 -left-4 bg-[#1e3a8a] text-white p-5 rounded-3xl shadow-2xl z-20 border border-blue-800 transform -rotate-2">
+                    <p class="text-[10px] uppercase opacity-70 font-bold tracking-widest mb-1">Presencia</p>
+                    <p class="text-xl font-black italic">+ 400 sucursales</p>
+                </div>
+
+                <div class="absolute -bottom-4 -right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-slate-100 z-20 text-right">
+                    <p class="text-[#33cc00] font-black text-3xl leading-none uppercase">cobertura</p>
+                    <p class="text-slate-400 text-[10px] uppercase font-bold tracking-widest">En todo México</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="como-funciona" class="py-20 bg-blue-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <h2 class="text-3xl md:text-5xl font-black leading-tight tracking-tighter">¡Es más fácil que enviar dinero!</h2>
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="bg-blue-500 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold">1</div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">Compra en Línea o cotiza por WhatsApp</h4>
+                                <p class="text-blue-200 text-sm">Mira nuestro catálogo y dinos qué necesitas para tu casa en México.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="bg-blue-500 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold">2</div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">Paga Seguro con Links de pago PayPal o Tarjeta de Crédito</h4>
+                                <p class="text-blue-200 text-sm">Sin comisiones bancarias altas. Usas tu cuenta de EE. UU. y listo.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="bg-blue-500 w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center font-bold">3</div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">Entregamos el pedido a tu familia en México</h4>
+                                <p class="text-blue-200 text-sm">Enviamos fotos de la carga y de la entrega final a tu familia en México.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="img/temp/familia.png" alt="Familia feliz" class="rounded-3xl shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500 grayscale hover:grayscale-0">
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl text-blue-900 max-w-[200px]">
+                        <p class="text-xs font-bold italic">"Mi esposo mandó el dinero desde Chicago y teníamos el piso en Michoacán."</p>
+                        <p class="text-[10px] mt-2 opacity-50 text-right">— Familia Pérez</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonios" class="py-20 px-6 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-black text-center mb-16 text-blue-900 tracking-tighter">Lo que dicen otros paisanos</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm italic text-slate-600">
+                    "Al principio me dio miedo mandar dinero así, pero me atendieron por WhatsApp hasta muy noche. El material llegó perfecto a Zacatecas."
+                    <div class="mt-4 not-italic font-bold text-blue-900">— Antonio R. (Dallas, TX)</div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm italic text-slate-600">
+                    "Gersamex me ayudó a elegir todo el baño para mis papás. Pagué con Zelle súper rápido y no me cobraron el envío porque era paquete grande."
+                    <div class="mt-4 not-italic font-bold text-blue-900">— María G. (Santa Ana, CA)</div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm italic text-slate-600">
+                    "Excelente servicio. Soy contratista acá en Phoenix y mandé remodelar mi casa en Guanajuato. Todo el azulejo es de primera."
+                    <div class="mt-4 not-italic font-bold text-blue-900">— Luis M. (Phoenix, AZ)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+       
+    <section class="py-20 px-6 bg-blue-600 text-white text-center">
+        <div class="max-w-2xl mx-auto space-y-8">
+            <h2 class="text-4xl font-black tracking-tighter">¿Listo para mejorar la casa de tus sueños?</h2>
+            <p class="text-lg opacity-90 font-light">Estamos en línea para cotizarte sin compromiso.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://wa.me/525512345678" class="bg-white text-blue-600 px-10 py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-2xl">
+                    <i data-lucide="message-circle" class="w-8 h-8"></i> Hablar con un Experto
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-slate-900 text-slate-400 px-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+            <div class="space-y-4">
+                <div class="flex items-center">
+                 <a href="/" class="block">
+                  <img src="img/temp/logo-blanco.png" alt="Logo GERSA" class="h-8 w-auto object-contain block">
+                 </a>
+               </div>
+                <p class="text-sm leading-relaxed">Expertos en pisos, azulejos y acabados de lujo con entrega garantizada en todo el territorio mexicano.</p>
+            </div>
+            <div>
+                <h5 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Empresa</h5>
+                <ul class="text-sm space-y-2">
+                    <li><a href="#" class="hover:text-white">Aviso de Privacidad</a></li>
+                    <li><a href="#" class="hover:text-white">Garantías de Envío</a></li>
+                    <li><a href="#" class="hover:text-white">Catálogo 2026</a></li>
+                    <li><a href="https://sucursales.gersamex.com.mx/" class="hover:text-white">Nuestras Sucursales</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Contacto Directo</h5>
+                <p class="text-sm">Oficinas CDMX: (55) 1234 5678</p>
+                <p class="text-sm mt-2">Email: ventas@gersamex.com.mx</p>
+                <div class="flex gap-4 mt-6">
+                    <a href="https://web.facebook.com/gersaenlinea" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="https://www.instagram.com/gersaenlinea/" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-12 mt-12 border-t border-slate-800 text-center text-[10px] uppercase tracking-[0.2em]">
+            © 2026 Gersamex. Hecho en México para nuestros paisanos en el mundo.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        /* --- LÓGICA DE MOVIMIENTO PARA EL CARRUSEL --- */
+        function moveSlider(direction) {
+            const slider = document.getElementById('product-slider');
+            const scrollAmount = 320; 
+            slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        let currentCurrency = 'USD';
+        const exchangeRate = 18.50; 
+
+        function setCurrency(cur) {
+            currentCurrency = cur;
+            const btnUsd = document.getElementById('btn-usd');
+            const btnMxn = document.getElementById('btn-mxn');
+
+            if(cur === 'USD') {
+                btnUsd.classList.replace('text-blue-300', 'text-white');
+                btnUsd.classList.replace('opacity-60', 'opacity-100');
+                btnUsd.classList.add('font-bold');
+                btnMxn.classList.replace('text-white', 'text-blue-300');
+                btnMxn.classList.replace('opacity-100', 'opacity-60');
+                btnMxn.classList.remove('font-bold');
+            } else {
+                btnMxn.classList.replace('text-blue-300', 'text-white');
+                btnMxn.classList.replace('opacity-60', 'opacity-100');
+                btnMxn.classList.add('font-bold');
+                btnUsd.classList.replace('text-white', 'text-blue-300');
+                btnUsd.classList.replace('opacity-100', 'opacity-60');
+                btnUsd.classList.remove('font-bold');
+            }
+
+            updatePrices();
+        }
+
+        function updatePrices() {
+          const priceElements = document.querySelectorAll('.price-val');
+          priceElements.forEach(el => {
+          const baseMXN = parseFloat(el.getAttribute('data-base'));
+          const hasSqMeter = el.innerText.includes('m²');
+          const suffix = hasSqMeter ? ' <span class="text-xs font-normal">/ m²</span>' : '';
+
+        if (currentCurrency === 'USD') {
+            const usdVal = (baseMXN / exchangeRate).toFixed(2);
+            el.innerHTML = `$${usdVal} USD${suffix}`;
+        } else {
+            const mxnVal = baseMXN.toLocaleString('es-MX', { minimumFractionDigits: 2 });
+            el.innerHTML = `$${mxnVal} MXN${suffix}`;
+        }
+          });
+        }
+    </script>
+</body>
+</html>
